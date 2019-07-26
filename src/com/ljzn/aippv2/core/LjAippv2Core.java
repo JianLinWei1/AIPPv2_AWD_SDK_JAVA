@@ -39,8 +39,12 @@ public final class LjAippv2Core {
 								"ml_face", "opencv_world341", "opencv_world341", "opencv_java341" }
 						: new String[] { "libgcc_s_sjlj-1", "libgfortran-3", "libopenblas", "libquadmath-0", "ml_face",
 								"ml_face", "opencv_world341_x86", "opencv_world341", "opencv_java341_x86" };
-
-				File tmp_file = Files.createTempDirectory(null).toFile();
+						
+				String sys_tmp_dir = System.getProperty("java.io.tmpdir");
+//				File tmp_file = Files.createTempDirectory(null).toFile();
+				File tmp_file = new File(sys_tmp_dir+"/lj");
+				if(!tmp_file.exists())
+					Files.createDirectory(tmp_file.toPath());
 				String platfromprefix = Platform.RESOURCE_PREFIX;
 				for (int i = 0; i < dlls.length; i++) {
 					String dllName = dlls[i] + ".dll";
